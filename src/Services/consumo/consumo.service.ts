@@ -25,7 +25,11 @@ export class ConsumoService {
         }
 
         
-        this.cliente.getony(consumo.idCliente).then((res)=> console.log(res.fechaNcimiento));
+        this.cliente.getony(consumo.idCliente).then((res)=> {
+            console.log(res.fechaNcimiento)
+            this.calcularedad(res.fechaNcimiento)
+        
+        });
         if(this.age>=50){
             total=total*.10
         }
