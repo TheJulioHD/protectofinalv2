@@ -16,7 +16,7 @@ export class ConsumoService {
    async create(consumo: ConsumoModel){
         const date= new Date();
         let total=0;
-        
+        let pagado= true
         if(consumo.consumo>1 && consumo.consumo<101){
             total= consumo.consumo*150;
         }else if(consumo.consumo>101 && consumo.consumo<301){
@@ -38,7 +38,7 @@ export class ConsumoService {
             idCliente:consumo.idCliente
             
         }).then(
-            (res) => this.pagoservice.create_pago(res.id ,total).then((res)=> console.log(res)).catch((error) => console.log(error))
+            (res) => this.pagoservice.create_pago(res.id ,total, pagado).then((res)=> console.log(res)).catch((error) => console.log(error))
         )
         .catch((error) => console.log(error))
     }
