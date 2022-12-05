@@ -12,7 +12,6 @@ export class ConsumoService {
     private consumoRepository: Repository<ConsumoEntity>,
     private pagoservice:PagoService,
     private cliente: ClienteService){}
-    age: any
 
    async create(consumo: ConsumoModel){
         const date= new Date();
@@ -23,15 +22,15 @@ export class ConsumoService {
         }else if(consumo.consumo>101 && consumo.consumo<301){
             total= consumo.consumo*190;
         }
-
+        let age;
         
         this.cliente.getony(consumo.idCliente).then((res)=> {
             console.log(res.fechaNcimiento)
-            this.calcularedad(res.fechaNcimiento)
+           age = this.calcularedad(res.fechaNcimiento)
         
         });
-        if(this.age>=50){
-            total=total*.10
+        if(age>=50){
+            total=total - (total*.10)
         }
         const newconsumo = await this.consumoRepository.save({
             fecha: date,
@@ -69,13 +68,14 @@ export class ConsumoService {
     }
     calcularedad(datenacimiento:Date){
         const date2 = new Date();
+        const fechaaminiento = new Date(datenacimiento)
         const anoactual:number = date2.getFullYear();
         const mesactual:number = date2.getMonth();
         const diaactual:number = date2.getDate();
 
-        const anoNacimiento = parseInt(String(datenacimiento).substring(0,4))
-        const mesNacimiento = parseInt(String(datenacimiento).substring(5,7))
-        const diaNacimiento = parseInt(String(datenacimiento).substring(8,10))
+        const anoNacimiento = parseInt(String(fechaaminiento).substring(0,4))
+        const mesNacimiento = parseInt(String(fechaaminiento).substring(5,7))
+        const diaNacimiento = parseInt(String(fechaaminiento).substring(8,10))
         let edad = anoactual - anoNacimiento;
         if(mesactual < mesNacimiento){
             edad--
@@ -84,7 +84,7 @@ export class ConsumoService {
                 edad--
             }
         }
-        this.age=edad
+        return edad
 
     }
 }
