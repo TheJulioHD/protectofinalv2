@@ -18,7 +18,7 @@ export class ConsumoController {
     Getall(){
         return this.consumoservice.getall().catch((err) => console.log(err))
     }
-    @Get("/all")
+    @Get("/max")
     Getall2(){
         return this.consumoservice.getmaximo().catch((err) => console.log(err))
     }
