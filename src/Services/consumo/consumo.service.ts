@@ -16,10 +16,10 @@ export class ConsumoService {
    async create(consumo: ConsumoModel){
         const date= new Date();
         let total=0;
-        let pagado= true
-        if(consumo.consumo>1 && consumo.consumo<101){
+        let pagado= consumo.pagadoc
+        if(consumo.consumo>=1 && consumo.consumo<=100){
             total= consumo.consumo*150;
-        }else if(consumo.consumo>101 && consumo.consumo<301){
+        }else if(consumo.consumo>=101 && consumo.consumo<=300){
             total= consumo.consumo*190;
         }
         let age;
@@ -45,6 +45,11 @@ export class ConsumoService {
     getall(){
         return this.consumoRepository.find({
             relations:['idCliente','pago.idConsumo']
+        })
+    }
+    getConsumoCliente(){
+        return this.consumoRepository.find({
+            relations:['idCliente']
         })
     }
     getmaximo(){

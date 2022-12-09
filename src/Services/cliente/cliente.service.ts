@@ -25,4 +25,70 @@ export class ClienteService {
             }
         })
     }
+
+    getreporte(){
+        return this.clienteRepository.find({
+            relations:{
+                consumo:{pago: true}
+            }
+        })
+    }
+    getpago(){
+        return this.clienteRepository.find({
+            relations:{
+                consumo:{pago: true}
+            },
+            select:{
+                id:true,
+                nombre:true,
+                apellido:true,
+                telefono:true,
+                domicilio:true,
+                fechaNacimiento:true,
+                consumo:{
+                    pago:true
+                }
+            }
+        })
+    }
+    getpagado(){
+        return this.clienteRepository.find({
+            relations:{
+                consumo:{pago: true}
+            },
+            where:{consumo:{pago:{pagado:true}}},
+            select:{
+                id:true,
+                nombre:true,
+                apellido:true,
+                telefono:true,
+                domicilio:true,
+                fechaNacimiento:true,
+                consumo:{
+                    pago:true
+                }
+            }
+        })
+    }
+    
+    getNopagado(){
+        return this.clienteRepository.find({
+            relations:{
+                consumo:{pago: true}
+            },
+            where:{consumo:{pago:{pagado:false}}},
+            select:{
+                id:true,
+                nombre:true,
+                apellido:true,
+                telefono:true,
+                domicilio:true,
+                fechaNacimiento:true,
+                consumo:{
+                    pago:true
+                }
+            }
+        })
+    }
+    
 }

@@ -3,4 +3,5 @@ export interface ConsumoModel{
     fecha: Date;
     consumo: number;
     idCliente: number;
+    pagadoc:boolean;
 }
