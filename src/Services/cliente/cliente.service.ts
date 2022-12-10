@@ -11,7 +11,8 @@ export class ClienteService {
                 private clienteRepository: Repository<ClienteEntity>){}
 
     async create(cliente:ClienteModel){
-        return await this.clienteRepository.insert(cliente).catch((error) => console.log("error =>"+ error))
+        console.log(cliente)
+        return await this.clienteRepository.save(cliente).catch((error) => console.log("error =>"+ error))
     }
 
     getall():Promise<ClienteEntity[]>{

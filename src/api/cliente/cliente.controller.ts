@@ -7,9 +7,10 @@ import { ClienteService } from 'src/Services/cliente/cliente.service';
 export class ClienteController {
     constructor(private clienteService: ClienteService){}
     @Post()
-    Create(@Body()params:ClienteModel){
+    Create(@Body()params:ClienteModel): boolean{
         try {
             this.clienteService.create(params)
+            return true
         } catch (error) {
             console.log("error =>"+error)
         }

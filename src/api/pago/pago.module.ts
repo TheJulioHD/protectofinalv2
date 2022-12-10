@@ -1,3 +1,4 @@
+import { PagoController } from './pago.controller';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClienteEntity } from 'src/Entity/Cliente.Entity';
@@ -10,7 +11,7 @@ import { ConsumoController } from '../consumo/consumo.controller';
 
 @Module({
     imports: [TypeOrmModule.forFeature([ConsumoEntity, PagoEntity, ClienteEntity])],
-    controllers: [ConsumoController],
+    controllers: [PagoController],
     providers: [ ConsumoService, PagoService, ClienteService],
     exports:[TypeOrmModule]
 })

@@ -19,5 +19,5 @@ export const Connection = TypeOrmModule.forRoot({
     password: '',
     database: 'proy',
     entities: [ClienteEntity, ConsumoEntity, PagoEntity],
-    synchronize: false,
+    synchronize: true,
   })

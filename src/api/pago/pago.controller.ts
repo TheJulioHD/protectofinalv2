@@ -9,7 +9,7 @@ export class PagoController {
     Getpago(){
         try {
             
-            this.PagoService.getPago()
+            this.PagoService.getPago().then((res)=> console.log(res))
         } catch (error) {
             console.log(error)
         }
@@ -18,7 +18,7 @@ export class PagoController {
     Getnopago(){
         try {
             
-            this.PagoService.getNopagados()
+            this.PagoService.getNopagados().then((res)=> console.log(res))
         } catch (error) {
             console.log(error)
         }
@@ -27,7 +27,7 @@ export class PagoController {
     Getsipago(){
         try {
             
-            this.PagoService.getpagados()
+            this.PagoService.getpagados().then((res)=> console.log(res))
         } catch (error) {
             console.log(error)
         }

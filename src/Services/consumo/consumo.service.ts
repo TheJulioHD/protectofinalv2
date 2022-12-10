@@ -26,7 +26,8 @@ export class ConsumoService {
         
         this.cliente.getony(consumo.idCliente).then((res)=> {
             console.log(res.fechaNacimiento)
-           age = this.calcularedad(res.fechaNacimiento)
+            let fechan = new Date(res.fechaNacimiento)
+           age = this.calcularedad(fechan)
         
         });
         if(age>=50){
