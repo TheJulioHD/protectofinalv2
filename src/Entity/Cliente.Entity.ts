@@ -17,7 +17,7 @@ export class ClienteEntity{
     @Column()
     domicilio: string;
     @Column()
-    fechaNacimiento: Date;
+    fechaNacimiento: string;
     @OneToMany(() => ConsumoEntity, (consumo) => consumo.idCliente)
     consumo: ConsumoEntity[];
 }

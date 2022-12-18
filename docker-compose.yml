@@ -11,21 +11,21 @@ services:
       - 3001:3000
     command: npm run start:docker
     env_file:
-      - .env
+      - '.env'
     networks:
       - webnet
   db:
-    image: mysql
-    restart: always
+    image: 'mysql'
+    restart: 'always'
     environment:
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: '${DB_NAME}'
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
     ports:
       - '${DB_PORT}:3306'
     expose:
       - '3306'
     volumes:
-      - my-db:/var/lib/mysql
+      - 'my-db:/var/lib/mysql'
 networks:
   webnet:
 volumes:

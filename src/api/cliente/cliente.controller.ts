@@ -1,5 +1,5 @@
 import { ClienteModel } from './../../models/Cliente.model';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ClienteService } from 'src/Services/cliente/cliente.service';
 
 
@@ -7,9 +7,10 @@ import { ClienteService } from 'src/Services/cliente/cliente.service';
 export class ClienteController {
     constructor(private clienteService: ClienteService){}
     @Post()
-    Create(@Body()params:ClienteModel){
+    Create(@Body()params:ClienteModel): boolean{
         try {
             this.clienteService.create(params)
+            return true
         } catch (error) {
             console.log("error =>"+error)
         }
@@ -26,6 +27,23 @@ export class ClienteController {
     Getall(){
         try {
             return this.clienteService.getall()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    @Get('/reporte')
+    Getreorte(){
+        try {
+            return this.clienteService.getreporte()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    @Get('/:id')
+    getclienteById(@Param('id') param){
+        try {
+            const cliente= this.clienteService.getbyid(param)
+            return cliente ?? "El cliente no existe"
         } catch (error) {
             console.log(error)
         }
