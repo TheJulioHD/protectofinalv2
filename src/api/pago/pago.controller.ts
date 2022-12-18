@@ -6,28 +6,29 @@ export class PagoController {
     constructor(private PagoService:PagoService){}
 
     @Get('/pago')
-    Getpago(){
+    async Getpago(){
         try {
             
-            this.PagoService.getPago().then((res)=> console.log(res))
+            return await this.PagoService.getPago()
+
         } catch (error) {
-            console.log(error)
+            console.log({error})
         }
     }
     @Get('/nopago')
-    Getnopago(){
+    async Getnopago(){
         try {
             
-            this.PagoService.getNopagados().then((res)=> console.log(res))
+           return await this.PagoService.getNopagados()
         } catch (error) {
             console.log(error)
         }
     }
     @Get('/sipago')
-    Getsipago(){
+    async Getsipago(){
         try {
             
-            this.PagoService.getpagados().then((res)=> console.log(res))
+          return await  this.PagoService.getpagados()
         } catch (error) {
             console.log(error)
         }

@@ -19,14 +19,15 @@ export class ClienteService {
         return this.clienteRepository.find()
     }
 
-    async getony(id:number):Promise<ClienteEntity>{
-        return  await this.clienteRepository.findOne({
-            where: {
-                id: id
-            }
-        })
+    async getony(id:number):Promise<string>{
+        return  (await this.clienteRepository.findOne({where:{id:id}})).fechaNacimiento
     }
-
+    async getbyid(id:number){
+        return   (await this.clienteRepository.findOne({
+            relations:{consumo: {pago: true}},
+            where:{id: id}
+        }))
+    }
     getreporte(){
         return this.clienteRepository.find({
             relations:{
@@ -47,6 +48,7 @@ export class ClienteService {
                 domicilio:true,
                 fechaNacimiento:true,
                 consumo:{
+                    id:true,
                     pago:true
                 }
             }
@@ -66,6 +68,7 @@ export class ClienteService {
                 domicilio:true,
                 fechaNacimiento:true,
                 consumo:{
+                    id:true,
                     pago:true
                 }
             }
@@ -86,6 +89,7 @@ export class ClienteService {
                 domicilio:true,
                 fechaNacimiento:true,
                 consumo:{
+                    id:true,
                     pago:true
                 }
             }

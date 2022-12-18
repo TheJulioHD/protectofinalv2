@@ -17,19 +17,16 @@ export class ConsumoService {
         const date= new Date();
         let total=0;
         let pagado= consumo.pagadoc
+        let fecha = new Date((await this.cliente.getony(consumo.idCliente)))
+        let age = this.calcularedad(fecha)
         if(consumo.consumo>=1 && consumo.consumo<=100){
             total= consumo.consumo*150;
         }else if(consumo.consumo>=101 && consumo.consumo<=300){
+            total= consumo.consumo*170;
+        }else{
             total= consumo.consumo*190;
+
         }
-        let age;
-        
-        this.cliente.getony(consumo.idCliente).then((res)=> {
-            console.log(res.fechaNacimiento)
-            let fechan = new Date(res.fechaNacimiento)
-           age = this.calcularedad(fechan)
-        
-        });
         if(age>=50){
             total=total - (total*.10)
         }
@@ -73,24 +70,19 @@ export class ConsumoService {
         })
     }
     calcularedad(datenacimiento:Date){
-        const date2 = new Date();
-        const fechaaminiento = new Date(datenacimiento)
-        const anoactual:number = date2.getFullYear();
-        const mesactual:number = date2.getMonth();
-        const diaactual:number = date2.getDate();
-
-        const anoNacimiento = parseInt(String(fechaaminiento).substring(0,4))
-        const mesNacimiento = parseInt(String(fechaaminiento).substring(5,7))
-        const diaNacimiento = parseInt(String(fechaaminiento).substring(8,10))
-        let edad = anoactual - anoNacimiento;
-        if(mesactual < mesNacimiento){
-            edad--
-        }else if(mesactual === mesNacimiento){
-            if(diaactual < diaNacimiento){
-                edad--
-            }
+        let hoy = new Date()
+        let fechaNacimiento = new Date(datenacimiento)
+        let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+        let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+        if (
+          diferenciaMeses < 0 ||
+          (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+        ) {
+          edad--
         }
         return edad
 
     }
+
+    
 }

@@ -23,13 +23,13 @@ export class PagoService {
     }
 
 
-    getNopagados(){
-        return this.cliente.getNopagado()
+    async getNopagados(){
+        return await this.cliente.getNopagado()
     }
-    getpagados(){
-        return this.cliente.getpagado()
+   async getpagados(){
+        return await this.cliente.getpagado()
     }
-    getPago(){
-        return this.cliente.getpago()
+   async getPago(){
+        return await this.cliente.getpago()
     }
 }
